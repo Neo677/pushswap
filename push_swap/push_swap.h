@@ -13,24 +13,30 @@
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <limits.h>
-#include <stdbool.h>
-#include <unistd.h>
+# include <limits.h>
+# include <stdbool.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include <unistd.h>
 
-typedef struct stack_node
+typedef struct stackys
 {
-	int 	 value;
-	int		position;
-	int last_node;
-	int push_pr;
-	bool median;
-	bool	cheaper;
-	struct stack_node *target;
-	struct stack_node *next_one;
-	struct stack_node *previous_node;
-}				stack_node;
+	int					value;
+	int					position;
+	int					last_node;
+	int					push_pr;
+	bool				median;
+	bool				cheaper;
+	struct stack_node	*target;
+	struct stack_node	*next_one;
+	struct stack_node	*previous_node;
+}						stackys;
 
+//					clean my shit
+void					free_thbackgrd(char **av);
+void					free_pile(stackys **stack);
+void					free_mystake(stackys *stack, char **av, bool fl_ac);
+int						syntax_fix(char *str_nb);
+int						repeat_error(stackys *ar, int nb);
 
 #endif
