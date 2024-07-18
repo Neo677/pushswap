@@ -27,9 +27,9 @@ typedef struct stackys
 	int					push_pr;
 	bool				median;
 	bool				cheaper;
-	struct stack_node	*target;
-	struct stack_node	*next_one;
-	struct stack_node	*previous_node;
+	struct stackys	*target;
+	struct stackys	*next_one;
+	struct stackys	*previous_node;
 }						stackys;
 
 //					clean my shit
@@ -45,5 +45,11 @@ static int	count_word(char *str, char sp);
 char	**ft_split(char *str, char sp);
 static char	*get_next_word(char *str, char sp);
 
+//commande utils for swap
+stackys	*discover_last_lone(stackys *top);
+void	look_lst_node(stackys **stack, int nb);
+stackys	*find_smallest(stackys *stack);
+stackys	*return_less(stackys *stack);
+int stack_len(stackys *stack);
 
 #endif
