@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tomtom <tomtom@student.42.fr>              +#+  +:+       +#+        */
+/*   By: thobenel <tomtom@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 15:23:19 by thobenel          #+#    #+#             */
 /*   Updated: 2024/07/06 00:10:44 by tomtom           ###   ########.fr       */
@@ -38,5 +38,12 @@ void					free_pile(stackys **stack);
 void					free_mystake(stackys *stack, char **av, bool fl_ac);
 int						syntax_fix(char *str_nb);
 int						repeat_error(stackys *ar, int nb);
+
+
+// print in commande line 
+static int	count_word(char *str, char sp);
+char	**ft_split(char *str, char sp);
+static char	*get_next_word(char *str, char sp);
+
 
 #endif
