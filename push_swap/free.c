@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thobenel <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: tomtom <tomtom@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 14:44:41 by thobenel          #+#    #+#             */
-/*   Updated: 2024/07/18 14:44:43 by thobenel         ###   ########.fr       */
+/*   Updated: 2024/07/26 18:48:43 by tomtom           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	free_pile(stackys **stack)
 	*stack = NULL;
 }
 
-void	free_mystake(stackys *stack, char **av, bool fl_ac)
+void	free_mystake(stackys **stack, char **av, bool fl_ac)
 {
 	free_pile(stack);
 	if (fl_ac)

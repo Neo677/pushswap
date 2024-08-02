@@ -3,20 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   RR.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thobenel <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: tomtom <tomtom@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 17:30:48 by thobenel          #+#    #+#             */
-/*   Updated: 2024/07/25 17:30:51 by thobenel         ###   ########.fr       */
+/*   Updated: 2024/07/26 19:05:56 by tomtom           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static void rott(stackys **stack)
+static void	rott(stackys **stack)
 {
-	int	len;
+	int		len;
 	stackys	*lst_node;
 
+	len = stack_len(*stack);
 	if (stack == NULL || *stack == NULL || len == 1)
 		return ;
 	lst_node = discover_last_lone(*stack);
@@ -37,7 +38,7 @@ void	ra(stackys **a, bool check)
 void	rb(stackys **b, bool check)
 {
 	rott(b);
-	if(!check)
+	if (!check)
 		write(1, "rb\n", 3);
 }
 

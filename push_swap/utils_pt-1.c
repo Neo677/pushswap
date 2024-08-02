@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_pt-1.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thobenel <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: tomtom <tomtom@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 15:01:24 by thobenel          #+#    #+#             */
-/*   Updated: 2024/07/18 15:01:26 by thobenel         ###   ########.fr       */
+/*   Updated: 2024/07/26 19:06:12 by tomtom           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,24 +16,24 @@ stackys	*discover_last_lone(stackys *top)
 {
 	if (top == NULL)
 		return (NULL);
-	while(top->next_one)
+	while (top->next_one)
 		top = top->next_one;
 	return (top);
 }
 
 void	look_lst_node(stackys **stack, int nb)
 {
-	stackys *node;
-	stackys *last;
+	stackys	*node;
+	stackys	*last;
 
 	if (stack == NULL)
-		return;
+		return ;
 	node = malloc(sizeof(stackys));
-	if (node == NULL)
-		return (free(node), NULL);
+	if (!node)
+		return ;
 	node->next_one = NULL;
 	node->value = nb;
-	if (*stack = NULL)
+	if (*stack == NULL)
 	{
 		*stack = node;
 		node->previous_node = NULL;
@@ -49,9 +49,9 @@ void	look_lst_node(stackys **stack, int nb)
 stackys	*find_smallest(stackys *stack)
 {
 	long	small;
-	stackys *small_node;
+	stackys	*small_node;
 
-	if (stack = NULL)
+	if (stack == NULL)
 		return (NULL);
 	small = LONG_MAX;
 	while (stack)
@@ -69,7 +69,7 @@ stackys	*return_less(stackys *stack)
 {
 	if (stack == NULL)
 		return (NULL);
-	while(stack)
+	while (stack)
 	{
 		if (stack->cheaper)
 			return (stack);
@@ -78,14 +78,14 @@ stackys	*return_less(stackys *stack)
 	return (NULL);
 }
 
-int stack_len(stackys *stack)
+int	stack_len(stackys *stack)
 {
 	int compteur;
 
 	if (stack == NULL)
 		return (0);
 	compteur = 0;
-	while(stack)
+	while (stack)
 	{
 		compteur++;
 		stack = stack->next_one;

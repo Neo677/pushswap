@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   swap.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thobenel <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: tomtom <tomtom@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 14:32:22 by thobenel          #+#    #+#             */
-/*   Updated: 2024/07/18 14:59:48 by thobenel         ###   ########.fr       */
+/*   Updated: 2024/07/26 19:06:08 by tomtom           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static void swap(stackys **top)
+static void	swap(stackys **top)
 {
-	int i;
+	int	i;
 
 	i = stack_len(*top);
 	if (*top == NULL || top == NULL || i == 1)
@@ -42,7 +42,7 @@ void	sb(stackys **b, bool checker)
 		write(1, "sb\n", 3);
 }
 
-void ss(stackys **a, stackys **b, bool checker)
+void	ss(stackys **a, stackys **b, bool checker)
 {
 	swap(a);
 	swap(b);

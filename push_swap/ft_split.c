@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thobenel <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: tomtom <tomtom@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 14:44:47 by thobenel          #+#    #+#             */
-/*   Updated: 2024/07/18 14:44:50 by thobenel         ###   ########.fr       */
+/*   Updated: 2024/07/26 19:05:28 by tomtom           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,14 +38,37 @@ static int	count_word(char *str, char sp)
 	return (i);
 }
 
+static char	*get_next_word(char *str, char sp)
+{
+	static int	cursor_cmd = 0;
+	char		*next;
+	int			len;
+	int			i;
+
+	while (str[cursor_cmd] == sp)
+		cursor_cmd++;
+	len = 0;
+	i = 0;
+	while ((str[cursor_cmd + len] != sp) && str[cursor_cmd + len])
+		len++;
+	next = malloc((size_t)len * sizeof(char) + 1);
+	if (NULL == next)
+		return (free(next), NULL);
+	while ((str[cursor_cmd] != sp) && str[cursor_cmd])
+		next[i++] = str[cursor_cmd++];
+	next[i] = '\0';
+	return (next);
+}
+
 // implmentation de argv dans la memoire
 
 char	**ft_split(char *str, char sp)
 {
-	int	i;
-	int	**vc;
-	int	count;
+	int		i;
+	char	**vc;
+	int		count;
 
+	i = 0;
 	count = count_word(str, sp);
 	if (!count)
 		exit(1);
@@ -67,26 +90,4 @@ char	**ft_split(char *str, char sp)
 	}
 	vc[i] = NULL;
 	return (vc);
-}
-
-static char	*get_next_word(char *str, char sp)
-{
-	static int cursor_cmd = 0;
-	char *next;
-	int len;
-	int i;
-
-	while (str[cursor_cmd] == sp)
-		cursor_cmd++;
-	len = 0;
-	i = 0;
-	while ((str[cursor_cmd + len] != sp) && str[cursor_cmd + len])
-		len++;
-	next = malloc((size_t)len * sizeof(char) + 1);
-	if (NULL == next)
-		return (free(next), NULL);
-	while ((str[cursor_cmd] != sp) && str[cursor_cmd])
-		next[i++] = str[cursor_cmd++];
-	next[i] = '\0';
-	return (next);
 }

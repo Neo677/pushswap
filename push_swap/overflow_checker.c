@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   overflow_checker.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thobenel <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: tomtom <tomtom@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 17:30:17 by thobenel          #+#    #+#             */
-/*   Updated: 2024/07/18 17:30:21 by thobenel         ###   ########.fr       */
+/*   Updated: 2024/07/26 18:53:23 by tomtom           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static long	ft_atol(const char *str)
 	i = 0;
 	num = 0;
 	neg = 0;
-	while (str[i] && (str[i] == ' ' || str[i] >= 9 && str[i] <= 13))
+	while ((str[i] && str[i] == ' ') || (str[i] >= 9 && str[i] <= 13))
 		i++;
 	if (str[i] == '+')
 		i++;
