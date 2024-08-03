@@ -1,8 +1,18 @@
-// 				header
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   push_swap_pt1.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: thobenel <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/08/03 13:32:34 by thobenel          #+#    #+#             */
+/*   Updated: 2024/08/03 13:32:36 by thobenel         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "push_swap.h"
 
-static void	rtt_a_b(stackys **stack_a, stackys **stack_b, stackys *m_cheap)
+static void	rtt_a_b(t_stackys **stack_a, t_stackys **stack_b, t_stackys *m_cheap)
 {
 	while (*stack_a != m_cheap->target && *stack_b != m_cheap)
 		rr(stack_a, stack_b, false);
@@ -10,7 +20,7 @@ static void	rtt_a_b(stackys **stack_a, stackys **stack_b, stackys *m_cheap)
 	suivi_de_pos(*stack_b);
 }
 
-static void	rev_rot_a_b(stackys **stack_a, stackys **stack_b, stackys *m_cheap)
+static void	rev_rot_a_b(t_stackys **stack_a, t_stackys **stack_b, t_stackys *m_cheap)
 {
 	while (*stack_a != m_cheap->target && *stack_b != m_cheap)
 		rrr(stack_a, stack_b, false);
@@ -18,7 +28,7 @@ static void	rev_rot_a_b(stackys **stack_a, stackys **stack_b, stackys *m_cheap)
 	suivi_de_pos(*stack_b);
 }
 
-void	end_R(stackys **stack, stackys *top, char name)
+void	end_r(t_stackys **stack, t_stackys *top, char name)
 {
 	while (*stack != top)
 	{
@@ -39,24 +49,24 @@ void	end_R(stackys **stack, stackys *top, char name)
 	}
 }
 
-static void	mv_node(stackys **stack_a, stackys **stack_b)
+static void	mv_node(t_stackys **stack_a, t_stackys **stack_b)
 {
-	stackys	*chp;
+	t_stackys	*chp;
 
 	chp = return_less(*stack_b);
 	if (chp->median && chp->target->median)
 		rtt_a_b(stack_a, stack_b, chp);
 	else if (!(chp->median) && !(chp->target->median))
 		rev_rot_a_b(stack_a, stack_b, chp);
-	end_R(stack_b, chp, 'b');
-	end_R(stack_a, chp, 'a');
+	end_r(stack_b, chp, 'b');
+	end_r(stack_a, chp, 'a');
 	pa(stack_a, stack_b, false);
 }
 
-void	push_swap(stackys **stack_a, stackys **stack_b)
+void	push_swap(t_stackys **stack_a, t_stackys **stack_b)
 {
-	stackys *sml;
-	int i;
+	t_stackys	*sml;
+	int		i;
 
 	i = stack_len(*stack_a);
 	if (i == 5)

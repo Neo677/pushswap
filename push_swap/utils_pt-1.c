@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   utils_pt-1.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tomtom <tomtom@student.42.fr>              +#+  +:+       +#+        */
+/*   By: thobenel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/18 15:01:24 by thobenel          #+#    #+#             */
-/*   Updated: 2024/07/26 19:06:12 by tomtom           ###   ########.fr       */
+/*   Created: 2024/08/03 13:33:41 by thobenel          #+#    #+#             */
+/*   Updated: 2024/08/03 13:33:44 by thobenel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-stackys	*discover_last_lone(stackys *top)
+t_stackys	*discover_last_lone(t_stackys *top)
 {
 	if (top == NULL)
 		return (NULL);
@@ -21,14 +21,14 @@ stackys	*discover_last_lone(stackys *top)
 	return (top);
 }
 
-void	look_lst_node(stackys **stack, int nb)
+void	look_lst_node(t_stackys **stack, int nb)
 {
-	stackys	*node;
-	stackys	*last;
+	t_stackys	*node;
+	t_stackys	*last;
 
 	if (stack == NULL)
 		return ;
-	node = malloc(sizeof(stackys));
+	node = malloc(sizeof(t_stackys));
 	if (!node)
 		return ;
 	node->next_one = NULL;
@@ -46,10 +46,10 @@ void	look_lst_node(stackys **stack, int nb)
 	}
 }
 
-stackys	*find_smallest(stackys *stack)
+t_stackys	*find_smallest(t_stackys *stack)
 {
 	long	small;
-	stackys	*small_node;
+	t_stackys	*small_node;
 
 	if (stack == NULL)
 		return (NULL);
@@ -65,7 +65,7 @@ stackys	*find_smallest(stackys *stack)
 	return (small_node);
 }
 
-stackys	*return_less(stackys *stack)
+t_stackys	*return_less(t_stackys *stack)
 {
 	if (stack == NULL)
 		return (NULL);
@@ -78,7 +78,7 @@ stackys	*return_less(stackys *stack)
 	return (NULL);
 }
 
-int	stack_len(stackys *stack)
+int	stack_len(t_stackys *stack)
 {
 	int compteur;
 

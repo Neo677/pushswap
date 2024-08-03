@@ -1,9 +1,19 @@
-// header
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   algo_init.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: thobenel <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/08/03 13:27:07 by thobenel          #+#    #+#             */
+/*   Updated: 2024/08/03 13:27:10 by thobenel         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "limits.h"
 #include "push_swap.h"
 
-void	suivi_de_pos(stackys *stack)
+void	suivi_de_pos(t_stackys *stack)
 {
 	int	i;
 	int	center;
@@ -24,10 +34,10 @@ void	suivi_de_pos(stackys *stack)
 	}
 }
 
-static void	def_target(stackys *stack_a, stackys *stack_b)
+static void	def_target(t_stackys *stack_a, t_stackys *stack_b)
 {
-	stackys		*current_stack_a;
-	stackys		*targette;
+	t_stackys		*current_stack_a;
+	t_stackys		*targette;
 	long int	match;
 
 	while (stack_b)
@@ -52,7 +62,7 @@ static void	def_target(stackys *stack_a, stackys *stack_b)
 	}
 }
 
-void	price(stackys *stack_a, stackys *stack_b)
+void	price(t_stackys *stack_a, t_stackys *stack_b)
 {
 	int	i;
 	int	j;
@@ -72,10 +82,10 @@ void	price(stackys *stack_a, stackys *stack_b)
 	}
 }
 
-void	cheap(stackys *stack_b)
+void	cheap(t_stackys *stack_b)
 {
 	long int	i;
-	stackys		*match;
+	t_stackys		*match;
 
 	if (stack_b == NULL)
 		return ;
@@ -92,7 +102,7 @@ void	cheap(stackys *stack_b)
 	match->cheaper = true;
 }
 
-void	init_vl(stackys *stack_b, stackys *stack_a)
+void	init_vl(t_stackys *stack_b, t_stackys *stack_a)
 {
 	suivi_de_pos(stack_a);
 	suivi_de_pos(stack_b);

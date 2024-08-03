@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   sorti_ptt.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tomtom <tomtom@student.42.fr>              +#+  +:+       +#+        */
+/*   By: thobenel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/25 15:41:52 by thobenel          #+#    #+#             */
-/*   Updated: 2024/07/26 19:06:03 by tomtom           ###   ########.fr       */
+/*   Created: 2024/08/03 13:33:12 by thobenel          #+#    #+#             */
+/*   Updated: 2024/08/03 13:33:13 by thobenel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-bool	sortie_stack(stackys *stack)
+bool	sortie_stack(t_stackys *stack)
 {
 	if (stack == NULL)
 		return (1);
@@ -25,10 +25,10 @@ bool	sortie_stack(stackys *stack)
 	return (true);
 }
 
-static stackys	*highest_in_the_stack(stackys *stack)
+static t_stackys	*highest_in_the_stack(t_stackys *stack)
 {
 	int		hig;
-	stackys	*bigest_node;
+	t_stackys	*bigest_node;
 
 	if (stack == NULL)
 		return (NULL);
@@ -45,9 +45,9 @@ static stackys	*highest_in_the_stack(stackys *stack)
 	return (bigest_node);
 }
 
-void	tiny(stackys **stack_a)
+void	tiny(t_stackys **stack_a)
 {
-	stackys	*hig_node;
+	t_stackys	*hig_node;
 
 	hig_node = highest_in_the_stack(*stack_a);
 	if (*stack_a == hig_node)
@@ -58,12 +58,12 @@ void	tiny(stackys **stack_a)
 		sa(stack_a, false);
 }
 
-void	five(stackys **stack_a, stackys **stack_b)
+void	five(t_stackys **stack_a, t_stackys **stack_b)
 {
 	while (stack_len(*stack_a) > 3)
 	{
 		init_vl(*stack_a, *stack_b);
-		end_R(stack_a, find_smallest(*stack_a), 'a');
+		end_r(stack_a, find_smallest(*stack_a), 'a');
 		pb(stack_b, stack_a, false);
 	}
 }

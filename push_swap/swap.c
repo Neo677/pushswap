@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   swap.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tomtom <tomtom@student.42.fr>              +#+  +:+       +#+        */
+/*   By: thobenel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/09 14:32:22 by thobenel          #+#    #+#             */
-/*   Updated: 2024/07/26 19:06:08 by tomtom           ###   ########.fr       */
+/*   Created: 2024/08/03 13:33:20 by thobenel          #+#    #+#             */
+/*   Updated: 2024/08/03 13:33:34 by thobenel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static void	swap(stackys **top)
+static void	swap(t_stackys **top)
 {
 	int	i;
 
@@ -28,21 +28,21 @@ static void	swap(stackys **top)
 	(*top)->previous_node = NULL;
 }
 
-void	sa(stackys **a, bool checker)
+void	sa(t_stackys **a, bool checker)
 {
 	swap(a);
 	if (!checker)
 		write(1, "sa\n", 3);
 }
 
-void	sb(stackys **b, bool checker)
+void	sb(t_stackys **b, bool checker)
 {
 	swap(b);
 	if (!checker)
 		write(1, "sb\n", 3);
 }
 
-void	ss(stackys **a, stackys **b, bool checker)
+void	ss(t_stackys **a, t_stackys **b, bool checker)
 {
 	swap(a);
 	swap(b);

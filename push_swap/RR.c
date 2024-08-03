@@ -3,19 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   RR.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tomtom <tomtom@student.42.fr>              +#+  +:+       +#+        */
+/*   By: thobenel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/25 17:30:48 by thobenel          #+#    #+#             */
-/*   Updated: 2024/07/26 19:05:56 by tomtom           ###   ########.fr       */
+/*   Created: 2024/08/03 13:33:03 by thobenel          #+#    #+#             */
+/*   Updated: 2024/08/03 13:33:05 by thobenel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static void	rott(stackys **stack)
+static void	rott(t_stackys **stack)
 {
 	int		len;
-	stackys	*lst_node;
+	t_stackys	*lst_node;
 
 	len = stack_len(*stack);
 	if (stack == NULL || *stack == NULL || len == 1)
@@ -28,21 +28,21 @@ static void	rott(stackys **stack)
 	lst_node->next_one->next_one = NULL;
 }
 
-void	ra(stackys **a, bool check)
+void	ra(t_stackys **a, bool check)
 {
 	rott(a);
 	if (!check)
 		write(1, "ra\n", 3);
 }
 
-void	rb(stackys **b, bool check)
+void	rb(t_stackys **b, bool check)
 {
 	rott(b);
 	if (!check)
 		write(1, "rb\n", 3);
 }
 
-void	rr(stackys **a, stackys **b, bool check)
+void	rr(t_stackys **a, t_stackys **b, bool check)
 {
 	rott(a);
 	rott(b);

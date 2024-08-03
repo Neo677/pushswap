@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tomtom <tomtom@student.42.fr>              +#+  +:+       +#+        */
+/*   By: thobenel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/18 14:44:47 by thobenel          #+#    #+#             */
-/*   Updated: 2024/07/26 19:05:28 by tomtom           ###   ########.fr       */
+/*   Created: 2024/08/03 13:31:11 by thobenel          #+#    #+#             */
+/*   Updated: 2024/08/03 13:31:15 by thobenel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,6 @@ char	**ft_split(char *str, char sp)
 	if (!count)
 		exit(1);
 	vc = malloc(sizeof(char *) * (size_t)(count + 2));
-	// add 2 dans la memoire pour le '\0' et le NULL la fin
 	if (vc == NULL)
 		return (free(vc), NULL);
 	while (count-- >= 0)
@@ -91,3 +90,4 @@ char	**ft_split(char *str, char sp)
 	vc[i] = NULL;
 	return (vc);
 }
+// add 2 dans la memoire pour le '\0' et le NULL la fin

@@ -1,10 +1,20 @@
-// header
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   push_cmd.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: thobenel <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/08/03 13:32:25 by thobenel          #+#    #+#             */
+/*   Updated: 2024/08/03 13:32:26 by thobenel         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "push_swap.h"
 
-static void	push(stackys **dst, stackys **src)
+static void	push(t_stackys **dst, t_stackys **src)
 {
-	stackys	*nd_push;
+	t_stackys	*nd_push;
 
 	if (*src == NULL)
 		return ;
@@ -26,14 +36,14 @@ static void	push(stackys **dst, stackys **src)
 	}
 }
 
-void	pa(stackys **stack_a, stackys **stack_b, bool checker)
+void	pa(t_stackys **stack_a, t_stackys **stack_b, bool checker)
 {
 	push(stack_a, stack_b);
 	if (!checker)
 		write(1, "pa\n", 3);
 }
 
-void	pb(stackys **stack_a, stackys **stack_b, bool checker)
+void	pb(t_stackys **stack_a, t_stackys **stack_b, bool checker)
 {
 	push(stack_b, stack_a);
 	if (!checker)

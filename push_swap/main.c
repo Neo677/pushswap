@@ -1,11 +1,21 @@
-// header
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: thobenel <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/08/03 13:31:51 by thobenel          #+#    #+#             */
+/*   Updated: 2024/08/03 13:31:54 by thobenel         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "push_swap.h"
 
-int 	main(int ac, char **av)
+int	main(int ac, char **av)
 {
-	stackys	*stack_a;
-	stackys *stack_b;
+	t_stackys	*stack_a;
+	t_stackys	*stack_b;
 
 	stack_a = NULL;
 	stack_b = NULL;

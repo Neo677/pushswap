@@ -1,10 +1,20 @@
-// header
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   rr_cmd.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: thobenel <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/08/03 13:32:53 by thobenel          #+#    #+#             */
+/*   Updated: 2024/08/03 13:32:55 by thobenel         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "push_swap.h"
 
-static void	rev_rot(stackys **stack)
+static void	rev_rot(t_stackys **stack)
 {
-	stackys	*lst;
+	t_stackys	*lst;
 	int		i;
 
 	i = stack_len(*stack);
@@ -18,20 +28,20 @@ static void	rev_rot(stackys **stack)
 	lst->next_one->previous_node = lst;
 }
 
-void	rra(stackys **satck_a, bool check)
+void	rra(t_stackys **satck_a, bool check)
 {
 	rev_rot(satck_a);
 	if (!check)
 		write(1, "rra\n", 4);
 }
 
-void	rrb(stackys **stack_b, bool check)
+void	rrb(t_stackys **stack_b, bool check)
 {
 	rev_rot(stack_b);
 	if (!check)
 		write(1, "rrb\n", 4);
 }
-void	rrr(stackys **stack_a, stackys **stack_b, bool check)
+void	rrr(t_stackys **stack_a, t_stackys **stack_b, bool check)
 {
 	rev_rot(stack_a);
 	rev_rot(stack_b);

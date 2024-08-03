@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tomtom <tomtom@student.42.fr>              +#+  +:+       +#+        */
+/*   By: thobenel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/18 14:44:41 by thobenel          #+#    #+#             */
-/*   Updated: 2024/07/26 18:48:43 by tomtom           ###   ########.fr       */
+/*   Created: 2024/08/03 13:30:59 by thobenel          #+#    #+#             */
+/*   Updated: 2024/08/03 13:31:00 by thobenel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,10 @@ void	free_thbackgrd(char **av)
 	free(av - 1);
 }
 
-void	free_pile(stackys **stack)
+void	free_pile(t_stackys **stack)
 {
-	stackys	*tm;
-	stackys	*ususal;
+	t_stackys	*tm;
+	t_stackys	*ususal;
 
 	if (stack == NULL)
 		return ;
@@ -44,7 +44,7 @@ void	free_pile(stackys **stack)
 	*stack = NULL;
 }
 
-void	free_mystake(stackys **stack, char **av, bool fl_ac)
+void	free_mystake(t_stackys **stack, char **av, bool fl_ac)
 {
 	free_pile(stack);
 	if (fl_ac)
@@ -70,7 +70,7 @@ int	syntax_fix(char *str_nb)
 	return (0);
 }
 
-int	repeat_error(stackys *ar, int nb)
+int	repeat_error(t_stackys *ar, int nb)
 {
 	if (ar == NULL)
 		return (0);

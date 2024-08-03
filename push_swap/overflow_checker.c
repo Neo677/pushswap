@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   overflow_checker.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tomtom <tomtom@student.42.fr>              +#+  +:+       +#+        */
+/*   By: thobenel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/18 17:30:17 by thobenel          #+#    #+#             */
-/*   Updated: 2024/07/26 18:53:23 by tomtom           ###   ########.fr       */
+/*   Created: 2024/08/03 13:32:12 by thobenel          #+#    #+#             */
+/*   Updated: 2024/08/03 13:32:15 by thobenel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,10 @@ static long	ft_atol(const char *str)
 	return (num * neg);
 }
 
-void	init_stack(stackys **a, char **av, bool ac)
+void	init_stack(t_stackys **a, char **av, bool ac)
 {
-	long nb;
-	int i;
+	long	nb;
+	int		i;
 
 	i = 0;
 	while (av[i])
