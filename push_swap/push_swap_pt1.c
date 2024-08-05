@@ -12,7 +12,8 @@
 
 #include "push_swap.h"
 
-static void	rtt_a_b(t_stackys **stack_a, t_stackys **stack_b, t_stackys *m_cheap)
+static void	rtt_a_b(t_stackys **stack_a, t_stackys **stack_b,
+		t_stackys *m_cheap)
 {
 	while (*stack_a != m_cheap->target && *stack_b != m_cheap)
 		rr(stack_a, stack_b, false);
@@ -20,7 +21,8 @@ static void	rtt_a_b(t_stackys **stack_a, t_stackys **stack_b, t_stackys *m_cheap
 	suivi_de_pos(*stack_b);
 }
 
-static void	rev_rot_a_b(t_stackys **stack_a, t_stackys **stack_b, t_stackys *m_cheap)
+static void	rev_rot_a_b(t_stackys **stack_a, t_stackys **stack_b,
+		t_stackys *m_cheap)
 {
 	while (*stack_a != m_cheap->target && *stack_b != m_cheap)
 		rrr(stack_a, stack_b, false);
@@ -66,7 +68,7 @@ static void	mv_node(t_stackys **stack_a, t_stackys **stack_b)
 void	push_swap(t_stackys **stack_a, t_stackys **stack_b)
 {
 	t_stackys	*sml;
-	int		i;
+	int			i;
 
 	i = stack_len(*stack_a);
 	if (i == 5)

@@ -15,7 +15,7 @@
 bool	sortie_stack(t_stackys *stack)
 {
 	if (stack == NULL)
-		return (1);
+		return (free(stack), 1);
 	while (stack->next_one)
 	{
 		if (stack->value > stack->next_one->value)
@@ -31,7 +31,7 @@ static t_stackys	*highest_in_the_stack(t_stackys *stack)
 	t_stackys	*bigest_node;
 
 	if (stack == NULL)
-		return (NULL);
+		return (free(stack), NULL);
 	hig = INT_MIN;
 	while (stack)
 	{

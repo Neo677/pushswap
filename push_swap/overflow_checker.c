@@ -45,7 +45,7 @@ void	init_stack(t_stackys **a, char **av, bool ac)
 
 	i = 0;
 	while (av[i])
-	{
+	{	
 		if (syntax_fix(av[i]))
 			free_mystake(a, av, ac);
 		nb = ft_atol(av[i]);

@@ -48,8 +48,10 @@ void	free_mystake(t_stackys **stack, char **av, bool fl_ac)
 {
 	free_pile(stack);
 	if (fl_ac)
+	{
 		free_thbackgrd(av);
-	write(2, "Error detected\n", 15);
+		write(2, "Error detected\n", 15);
+	}
 	exit(1);
 }
 
