@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thobenel <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: tomtom <tomtom@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/03 13:31:11 by thobenel          #+#    #+#             */
-/*   Updated: 2024/08/03 13:31:15 by thobenel         ###   ########.fr       */
+/*   Updated: 2024/08/05 21:44:49 by tomtom           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,15 +40,17 @@ static int	count_word(char *str, char sp)
 
 static char	*get_next_word(char *str, char sp)
 {
-	static int	cursor_cmd = 0;
+	static int	cursor_cmd;
 	char		*next;
 	int			len;
 	int			i;
 
-	while (str[cursor_cmd] == sp)
-		cursor_cmd++;
+	cursor_cmd = 0;
 	len = 0;
 	i = 0;
+	while (str[cursor_cmd] == sp)
+		cursor_cmd++;
+
 	while ((str[cursor_cmd + len] != sp) && str[cursor_cmd + len])
 		len++;
 	next = malloc((size_t)len * sizeof(char) + 1);

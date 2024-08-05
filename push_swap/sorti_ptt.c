@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sorti_ptt.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thobenel <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: tomtom <tomtom@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/03 13:33:12 by thobenel          #+#    #+#             */
-/*   Updated: 2024/08/03 13:33:13 by thobenel         ###   ########.fr       */
+/*   Updated: 2024/08/05 21:38:35 by tomtom           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 bool	sortie_stack(t_stackys *stack)
 {
 	if (stack == NULL)
-		return (free(stack), 1);
+		return (1);
 	while (stack->next_one)
 	{
 		if (stack->value > stack->next_one->value)
@@ -27,7 +27,7 @@ bool	sortie_stack(t_stackys *stack)
 
 static t_stackys	*highest_in_the_stack(t_stackys *stack)
 {
-	int		hig;
+	int			hig;
 	t_stackys	*bigest_node;
 
 	if (stack == NULL)

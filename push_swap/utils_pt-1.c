@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_pt-1.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thobenel <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: tomtom <tomtom@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/03 13:33:41 by thobenel          #+#    #+#             */
-/*   Updated: 2024/08/03 13:33:44 by thobenel         ###   ########.fr       */
+/*   Updated: 2024/08/05 22:20:38 by tomtom           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	look_lst_node(t_stackys **stack, int nb)
 	if (stack == NULL)
 		return ;
 	node = malloc(sizeof(t_stackys));
-	if (!node)
+	if (node == NULL)
 		return ;
 	node->next_one = NULL;
 	node->value = nb;
