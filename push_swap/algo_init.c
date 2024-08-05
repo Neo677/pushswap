@@ -36,8 +36,8 @@ void	suivi_de_pos(t_stackys *stack)
 
 static void	def_target(t_stackys *stack_a, t_stackys *stack_b)
 {
-	t_stackys		*current_stack_a;
-	t_stackys		*targette;
+	t_stackys	*current_stack_a;
+	t_stackys	*targette;
 	long int	match;
 
 	while (stack_b)
@@ -85,7 +85,7 @@ void	price(t_stackys *stack_a, t_stackys *stack_b)
 void	cheap(t_stackys *stack_b)
 {
 	long int	i;
-	t_stackys		*match;
+	t_stackys	*match;
 
 	if (stack_b == NULL)
 		return ;

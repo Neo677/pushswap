@@ -83,7 +83,6 @@ t_stackys			*find_smallest(t_stackys *stack);
 t_stackys			*return_less(t_stackys *stack);
 int					stack_len(t_stackys *stack);
 
-int	main(int ac, char **av);
-
+int					main(int ac, char **av);
 
 #endif
