@@ -43,7 +43,7 @@ void	pa(t_stackys **stack_a, t_stackys **stack_b, bool checker)
 		write(1, "pa\n", 3);
 }
 
-void	pb(t_stackys **stack_a, t_stackys **stack_b, bool checker)
+void	pb(t_stackys **stack_b, t_stackys **stack_a, bool checker)
 {
 	push(stack_b, stack_a);
 	if (!checker)

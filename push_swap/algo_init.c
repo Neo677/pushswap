@@ -30,7 +30,7 @@ void	suivi_de_pos(t_stackys *stack)
 		else
 			stack->median = false;
 		stack = stack->next_one;
-		i++;
+		++i;
 	}
 }
 
@@ -54,7 +54,7 @@ static void	def_target(t_stackys *stack_a, t_stackys *stack_b)
 			}
 			current_stack_a = current_stack_a->next_one;
 		}
-		if (match == LONG_MAX)
+		if (LONG_MAX == match)
 			stack_b->target = find_smallest(stack_a);
 		else
 			stack_b->target = targette;

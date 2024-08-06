@@ -61,6 +61,7 @@ t_stackys	*find_smallest(t_stackys *stack)
 			small = stack->value;
 			small_node = stack;
 		}
+		stack = stack->next_one;
 	}
 	return (small_node);
 }
@@ -87,7 +88,7 @@ int	stack_len(t_stackys *stack)
 	compteur = 0;
 	while (stack)
 	{
-		compteur++;
+		++compteur;
 		stack = stack->next_one;
 	}
 	return (compteur);

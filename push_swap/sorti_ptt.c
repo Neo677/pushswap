@@ -14,7 +14,7 @@
 
 bool	sortie_stack(t_stackys *stack)
 {
-	if (stack == NULL)
+	if (NULL == stack)
 		return (1);
 	while (stack->next_one)
 	{

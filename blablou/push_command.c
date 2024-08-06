@@ -1,11 +1,8 @@
 
 
 #include "push_swap.h"
+#include <stdio.h>
 
-/*
- * Push a node to the top from src to dest
- * 🚨 attention If stack empty (i.e. NULL)
-*/
 static void	push(t_stack_node **dest, t_stack_node **src)
 {
 	t_stack_node	*node_to_push;
@@ -34,12 +31,12 @@ void	pa(t_stack_node **a, t_stack_node **b, bool checker)
 {
 	push(a, b);
 	if (!checker)
-		write(1, "pa\n", 3);
+		printf("pa\n");
 }
 
 void	pb(t_stack_node **b, t_stack_node **a, bool checker)
 {
 	push(b, a);
 	if (!checker)
-		write(1, "pb\n", 3);
+		printf("pb\n");
 }

@@ -43,7 +43,7 @@ int					repeat_error(t_stackys *ar, int nb);
 char				**ft_split(char *str, char sp);
 
 //				verifier qu'on depasse pas, comme au coloriage
-void				init_stack(t_stackys **a, char **av, bool ac);
+void	init_stack(t_stackys **a, char **argv, bool flag_argc_2);
 
 //				initailiser mes stack
 void				suivi_de_pos(t_stackys *stack);

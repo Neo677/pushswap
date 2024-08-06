@@ -5,10 +5,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-/*
- *  atol, i need it to check eventual overflows
- *  converting every string into a long value
-*/
+
 static long	ft_atol(const char *str)
 {
 	long	num;
@@ -36,17 +33,6 @@ static long	ft_atol(const char *str)
 	}
 	return (num * isneg);
 }
-
-/*
- * Create the stack with the command line values
- * Checks are embedded in the creation itslef
- * 		~Duplicate values
- * 		~Over|Underflow
- * 		~Syntax errors
- *
- * 	🏁 Flag is useful cause if true, i have the argv in the HEAP to free
- *
-*/
 void	stack_init(t_stack_node **a, char **argv, bool flag_argc_2)
 {
 	long	nbr;

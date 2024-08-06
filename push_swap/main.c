@@ -12,27 +12,30 @@
 
 #include "push_swap.h"
 
-int	main(int ac, char **av)
+int	main(int argc, char **argv)
 {
-	t_stackys	*stack_a;
-	t_stackys	*stack_b;
+	t_stackys	*a;
+	t_stackys	*b;
 
-	stack_a = NULL;
-	stack_b = NULL;
-
-	if (ac == 1 || (ac == 2 && !av[1][0]))
-		return (1);
-	else if (ac == 2)
-		av = ft_split(av[1], ' ');
-	init_stack(&stack_a, av + 1, ac == 2);
-	if (!sortie_stack(stack_a))
+	a = NULL;
+	b = NULL;
+	if (1 == argc || (2 == argc && !argv[1][0]))
+		return (printf("only 1 argument"), 1);
+	else if (2 == argc)
 	{
-		if (stack_len(stack_a) == 2)
-			sa(&stack_a, false);
-		else if (stack_len(stack_a) == 3)
-			tiny(&stack_a);
-		else
-			push_swap(&stack_a, &stack_b);
+		printf("only 2 argument\n");
+		argv = ft_split(argv[1], ' ');
+		printf("argv = %d\n", argc);
 	}
-	free_pile(&stack_a);
+	init_stack(&a, argv + 1, 2 == argc);
+	if (!sortie_stack(a))
+	{
+		if (stack_len(a) == 2)
+			sa(&a, false);
+		else if (stack_len(a) == 3)
+			tiny(&a);
+		else
+			push_swap(&a, &b);
+	}
+	free_pile(&a);
 }
