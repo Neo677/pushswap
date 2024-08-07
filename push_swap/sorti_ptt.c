@@ -6,64 +6,66 @@
 /*   By: tomtom <tomtom@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/03 13:33:12 by thobenel          #+#    #+#             */
-/*   Updated: 2024/08/05 21:38:35 by tomtom           ###   ########.fr       */
+/*   Updated: 2024/08/07 01:31:30 by tomtom           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+#include <limits.h>
+#include <stdbool.h>
+#include <stdio.h>
 
-bool	sortie_stack(t_stackys *stack)
+bool	stack_sorted(t_stack_node *stack)
 {
 	if (NULL == stack)
 		return (1);
-	while (stack->next_one)
+	while (stack->next)
 	{
-		if (stack->value > stack->next_one->value)
+		if (stack->value > stack->next->value)
 			return (false);
-		stack = stack->next_one;
+		stack = stack->next;
 	}
 	return (true);
 }
 
-static t_stackys	*highest_in_the_stack(t_stackys *stack)
+static t_stack_node	*find_highest(t_stack_node *stack)
 {
-	int			hig;
-	t_stackys	*bigest_node;
+	int				highest;
+	t_stack_node	*highest_node;
 
-	if (stack == NULL)
-		return (free(stack), NULL);
-	hig = INT_MIN;
+	if (NULL == stack)
+		return (NULL);
+	highest = INT_MIN;
 	while (stack)
 	{
-		if (stack->value > hig)
+		if (stack->value > highest)
 		{
-			hig = stack->value;
-			bigest_node = stack;
+			highest = stack->value;
+			highest_node = stack;
 		}
-		stack = stack->next_one;
+		stack = stack->next;
 	}
-	return (bigest_node);
+	return (highest_node);
+}
+void	tiny_sort(t_stack_node **a)
+{
+	t_stack_node	*highest_node;
+
+	highest_node = find_highest(*a);
+	if (*a == highest_node)
+		ra(a, false);
+	else if ((*a)->next == highest_node)
+		rra(a, false);
+	if ((*a)->value > (*a)->next->value)
+		sa(a, false);
 }
 
-void	tiny(t_stackys **stack_a)
+void	handle_five(t_stack_node **a, t_stack_node **b)
 {
-	t_stackys	*hig_node;
-
-	hig_node = highest_in_the_stack(*stack_a);
-	if (*stack_a == hig_node)
-		ra(stack_a, false);
-	else if ((*stack_a)->next_one == hig_node)
-		rra(stack_a, false);
-	if ((*stack_a)->value > (*stack_a)->next_one->value)
-		sa(stack_a, false);
-}
-
-void	five(t_stackys **stack_a, t_stackys **stack_b)
-{
-	while (stack_len(*stack_a) > 3)
+	while (count_stack_nodes(*a) > 3)
 	{
-		init_vl(*stack_a, *stack_b);
-		end_r(stack_a, find_smallest(*stack_a), 'a');
-		pb(stack_b, stack_a, false);
+		initialize_nodes(*a, *b);
+		finish_rotation(a, find_minimum(*a), 'a');
+		pb(b, a, false);
 	}
 }

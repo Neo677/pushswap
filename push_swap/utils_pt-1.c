@@ -6,90 +6,91 @@
 /*   By: tomtom <tomtom@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/03 13:33:41 by thobenel          #+#    #+#             */
-/*   Updated: 2024/08/05 22:20:38 by tomtom           ###   ########.fr       */
+/*   Updated: 2024/08/07 01:01:22 by tomtom           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+#include <limits.h>
 
-t_stackys	*discover_last_lone(t_stackys *top)
+t_stack_node	*get_tail_node(t_stack_node *start)
 {
-	if (top == NULL)
+	if (start == NULL)
 		return (NULL);
-	while (top->next_one)
-		top = top->next_one;
-	return (top);
+	while (start->next != NULL)
+		start = start->next;
+	return (start);
 }
 
-void	look_lst_node(t_stackys **stack, int nb)
+void	add_node_to_stack(t_stack_node **stack, int nbr)
 {
-	t_stackys	*node;
-	t_stackys	*last;
+	t_stack_node	*node;
+	t_stack_node	*last_node;
 
 	if (stack == NULL)
-		return ;
-	node = malloc(sizeof(t_stackys));
+		return;
+	node = (t_stack_node *)malloc(sizeof(t_stack_node));
 	if (node == NULL)
-		return ;
-	node->next_one = NULL;
-	node->value = nb;
+		return;
+	node->next = NULL;
+	node->value = nbr;
 	if (*stack == NULL)
 	{
 		*stack = node;
-		node->previous_node = NULL;
+		node->prev = NULL;
 	}
 	else
 	{
-		last = discover_last_lone(*stack);
-		last->next_one = node;
-		node->previous_node = last;
+		last_node = get_tail_node(*stack);
+		last_node->next = node;
+		node->prev = last_node;
 	}
 }
 
-t_stackys	*find_smallest(t_stackys *stack)
+t_stack_node	*find_minimum(t_stack_node *stack)
 {
-	long	small;
-	t_stackys	*small_node;
+	long			min_value;
+	t_stack_node	*min_node;
 
 	if (stack == NULL)
 		return (NULL);
-	small = LONG_MAX;
-	while (stack)
+	min_value = LONG_MAX;
+	while (stack != NULL)
 	{
-		if (stack->value < small)
+		if (stack->value < min_value)
 		{
-			small = stack->value;
-			small_node = stack;
+			min_value = stack->value;
+			min_node = stack;
 		}
-		stack = stack->next_one;
+		stack = stack->next;
 	}
-	return (small_node);
+	return (min_node);
 }
 
-t_stackys	*return_less(t_stackys *stack)
+t_stack_node	*locate_cheapest(t_stack_node *stack)
 {
 	if (stack == NULL)
 		return (NULL);
-	while (stack)
+	while (stack != NULL)
 	{
-		if (stack->cheaper)
+		if (stack->cheapest)
 			return (stack);
-		stack = stack->next_one;
+		stack = stack->next;
 	}
 	return (NULL);
 }
 
-int	stack_len(t_stackys *stack)
+int	count_stack_nodes(t_stack_node *stack)
 {
-	int compteur;
+	int	total;
 
+	total = 0;
 	if (stack == NULL)
 		return (0);
-	compteur = 0;
 	while (stack)
 	{
-		++compteur;
-		stack = stack->next_one;
+		total++;
+		stack = stack->next;
 	}
-	return (compteur);
+	return (total);
 }

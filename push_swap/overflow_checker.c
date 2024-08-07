@@ -3,61 +3,64 @@
 /*                                                        :::      ::::::::   */
 /*   overflow_checker.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thobenel <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: tomtom <tomtom@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/03 13:32:12 by thobenel          #+#    #+#             */
-/*   Updated: 2024/08/03 13:32:15 by thobenel         ###   ########.fr       */
+/*   Updated: 2024/08/07 01:03:59 by tomtom           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+#include <limits.h>
+#include <stdlib.h>
+#include <stdio.h>
 
-static long	ft_atol(const char *str)
+static long	ft_atoi_to_long(const char *str)
 {
 	long	num;
-	int		neg;
+	int		isneg;
 	int		i;
 
-	i = 0;
 	num = 0;
-	neg = 0;
-	while (str[i] && (str[i] == ' ' || str[i] == '\t' || str[i] == '\n' 
-									|| str[i] == '\r' || str[i] == '\v' 
-									|| str[i] == '\f'))
+	isneg = 1;
+	i = 0;
+	while (str[i] && (str[i] == ' ' || str[i] == '\t'
+			|| str[i] == '\n' || str[i] == '\r'
+			|| str[i] == '\v' || str[i] == '\f'))
 		i++;
 	if (str[i] == '+')
 		i++;
 	else if (str[i] == '-')
 	{
-		neg *= -1;
+		isneg *= -1;
 		i++;
 	}
 	while (str[i] >= '0' && str[i] <= '9')
 	{
-		num = (num * 10) + (str[i] - '0');
+		num = num * 10 + (str[i] - '0');
 		i++;
 	}
-	return (num * neg);
+	return (num * isneg);
 }
 
-void	init_stack(t_stackys **a, char **argv, bool flag_argc_2)
+void	initialize_stack(t_stack_node **a, char **argv, bool flag_argc_2)
 {
-	long	nbr;
+	long	value;
 	int		i;
 
 	i = 0;
-	while (argv[i])
+	while (argv[i] != NULL)
 	{
-		if (syntax_fix(argv[i]))
-			free_mystake(a, argv, flag_argc_2);
-		nbr = ft_atol(argv[i]);
-		if (nbr > INT_MAX || nbr < INT_MIN)
-			free_mystake(a, argv, flag_argc_2);
-		if (repeat_error(*a, (int)nbr))
-			free_mystake(a, argv, flag_argc_2);
-		look_lst_node(a, (int)nbr);
-		++i;
+		if (error_syntax(argv[i]))
+			error_free(a, argv, flag_argc_2);
+		value = ft_atoi_to_long(argv[i]);
+		if (value > INT_MAX || value < INT_MIN)
+			error_free(a, argv, flag_argc_2);
+		if (error_repetition(*a, (int)value))
+			error_free(a, argv, flag_argc_2);
+		add_node_to_stack(a, (int)value);
+		i++;
 	}
 	if (flag_argc_2)
-		free_thbackgrd(argv);
+		free_matrix(argv);
 }

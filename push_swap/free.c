@@ -6,74 +6,78 @@
 /*   By: tomtom <tomtom@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/03 13:30:59 by thobenel          #+#    #+#             */
-/*   Updated: 2024/08/05 20:22:55 by tomtom           ###   ########.fr       */
+/*   Updated: 2024/08/07 00:40:46 by tomtom           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+#include <stdlib.h>
+#include <stdio.h>
 
-void	free_thbackgrd(char **av)
+void	free_matrix(char **argv)
 {
 	int	i;
 
 	i = -1;
-	if (av == NULL || *av == NULL)
+	if (NULL == argv || NULL == *argv)
 		return ;
-	while (av[i])
-		free(av[i++]);
-	free(av - 1);
+	while (argv[i])
+		free(argv[i++]);
+	free(argv - 1);
 }
 
-void	free_pile(t_stackys **stack)
+void	free_stack(t_stack_node **stack)
 {
-	t_stackys	*tm;
-	t_stackys	*ususal;
+	t_stack_node	*tmp;
+	t_stack_node	*current;
 
-	if (stack == NULL)
+	if (NULL == stack)
 		return ;
-	ususal = *stack;
-	while (ususal)
+	current = *stack;
+	while (current)
 	{
-		tm = ususal->next_one;
-		free(ususal);
-		ususal = tm;
+		tmp = current->next;
+		free(current);
+		current = tmp;
 	}
 	*stack = NULL;
 }
-
-void	free_mystake(t_stackys **stack, char **av, bool fl_ac)
+void	error_free(t_stack_node **a, char **argv, bool flag_argc_2)
 {
-	free_pile(stack);
-	if (fl_ac)
-		free_thbackgrd(av);
-	write(2, "Error detected\n", 15);
-	printf("cheker free_mystaque\n");
+	free_stack(a);
+	if (flag_argc_2)
+		free_matrix(argv);
+	write(2, "Error\n", 6);
 	exit(1);
 }
 
-int	syntax_fix(char *str_nb)
+int	error_syntax(char *str_nbr)
 {
-	if (!(*str_nb == '+' || *str_nb == '-' || (*str_nb >= '0' && *str_nb <= '9')))
+	if (!(*str_nbr == '+'
+			|| *str_nbr == '-'
+			|| (*str_nbr >= '0' && *str_nbr <= '9')))
 		return (1);
-	if ((*str_nb == '+' || *str_nb == '-') && (!(str_nb[1] >= '0' && str_nb[1] <= '9')))
+	if ((*str_nbr == '+'
+			|| *str_nbr == '-')
+		&& !(str_nbr[1] >= '0' && str_nbr[1] <= '9'))
 		return (1);
-	while (*str_nb++)
+	while (*++str_nbr)
 	{
-		if (!(*str_nb >= '0' || *str_nb <= '9'))
+		if (!(*str_nbr >= '0' && *str_nbr <= '9'))
 			return (1);
 	}
 	return (0);
 }
 
-int	repeat_error(t_stackys *ar, int nb)
+int	error_repetition(t_stack_node *a, int nbr)
 {
-	if (ar == NULL)
+	if (NULL == a)
 		return (0);
-	while (ar)
+	while (a)
 	{
-		if (ar->value == nb)
+		if (a->value == nbr)
 			return (1);
-		ar = ar->next_one;
+		a = a->next;
 	}
 	return (0);
 }

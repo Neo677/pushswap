@@ -6,90 +6,81 @@
 /*   By: tomtom <tomtom@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/03 13:31:11 by thobenel          #+#    #+#             */
-/*   Updated: 2024/08/05 21:44:49 by tomtom           ###   ########.fr       */
+/*   Updated: 2024/08/07 01:13:17 by tomtom           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+#include <stddef.h>
 
-// pour affichage des arguments dans la command line
-
-static int	count_word(char *str, char sp)
+static int	count_segments(char *str, char delim)
 {
-	int		i;
-	bool	word;
+	int		count;
+	bool	in_word;
 
-	i = 0;
+	count = 0;
 	while (*str)
 	{
-		word = false;
-		while (*str == sp && *str)
+		in_word = false;
+		while (*str == delim && *str)
 			str++;
-		while (*str != sp && *str)
+		while (*str != delim && *str)
 		{
-			if (!word)
+			if (!in_word)
 			{
-				i++;
-				word = true;
+				++count;
+				in_word = true;
 			}
 			str++;
 		}
+		in_word = false;
 	}
-	return (i);
+	return (count);
 }
 
-static char	*get_next_word(char *str, char sp)
+static char	*extract_next_segment(char *str, char delim)
 {
-	static int	cursor_cmd;
-	char		*next;
+	static int	cursor;
+	char		*next_str;
 	int			len;
 	int			i;
 
-	cursor_cmd = 0;
 	len = 0;
 	i = 0;
-	while (str[cursor_cmd] == sp)
-		cursor_cmd++;
-
-	while ((str[cursor_cmd + len] != sp) && str[cursor_cmd + len])
+	cursor = 0;
+	while (str[cursor] == delim)
+		cursor++;
+	while ((str[cursor + len] != delim) && str[cursor + len])
 		len++;
-	next = malloc((size_t)len * sizeof(char) + 1);
-	if (NULL == next)
-		return (free(next), NULL);
-	while ((str[cursor_cmd] != sp) && str[cursor_cmd])
-		next[i++] = str[cursor_cmd++];
-	next[i] = '\0';
-	return (next);
+	next_str = malloc((size_t)len * sizeof(char) + 1);
+	if (NULL == next_str)
+		return (NULL);
+	while ((str[cursor] != delim) && str[cursor])
+		next_str[i++] = str[cursor++];
+	next_str[i] = '\0';
+	return (next_str);
 }
 
-// implmentation de argv dans la memoire
-
-char	**ft_split(char *str, char sp)
+char	**ft_split(char *str, char delim)
 {
+	int		words_number;
+	char	**vector_strings;
 	int		i;
-	char	**vc;
-	int		count;
 
 	i = 0;
-	count = count_word(str, sp);
-	if (!count)
+	words_number = count_segments(str, delim);
+	if (words_number == 0)
 		exit(1);
-	vc = malloc(sizeof(char *) * (size_t)(count + 2));
-	if (vc == NULL)
-		return (free(vc), NULL);
-	while (count-- >= 0)
+	vector_strings = (char **)malloc(sizeof(char *) * (size_t)(words_number + 2));
+	if (vector_strings == NULL)
+		return (NULL);
+	while (words_number-- >= 0)
 	{
-		if (i == 0)
-		{
-			vc[i] = malloc(sizeof(char));
-			if (vc[i] == NULL)
-				return (free(vc), NULL);
-			vc[i++][0] = '\0';
-			continue ;
-		}
-		vc[i++] = get_next_word(str, sp);
+			vector_strings[i] = extract_next_segment(str, delim);
+			if (vector_strings[i] == NULL)
+				return (NULL);
+			i++;
 	}
-	vc[i] = NULL;
-	return (vc);
+	vector_strings[i] = NULL;
+	return (vector_strings);
 }
-// add 2 dans la memoire pour le '\0' et le NULL la fin

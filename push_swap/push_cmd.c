@@ -3,49 +3,49 @@
 /*                                                        :::      ::::::::   */
 /*   push_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thobenel <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: tomtom <tomtom@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/03 13:32:25 by thobenel          #+#    #+#             */
-/*   Updated: 2024/08/03 13:32:26 by thobenel         ###   ########.fr       */
+/*   Updated: 2024/08/07 00:42:16 by tomtom           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static void	push(t_stackys **dst, t_stackys **src)
+static void	push(t_stack_node **dest, t_stack_node **src)
 {
-	t_stackys	*nd_push;
+	t_stack_node	*node_to_push;
 
-	if (*src == NULL)
+	if (NULL == *src)
 		return ;
-	nd_push = *src;
-	*src = (*src)->next_one;
+	node_to_push = *src;
+	*src = (*src)->next;
 	if (*src)
-		(*src)->previous_node = NULL;
-	nd_push->previous_node = NULL;
-	if (*dst == NULL)
+		(*src)->prev = NULL;
+	node_to_push->prev = NULL;
+	if (NULL == *dest)
 	{
-		*dst = nd_push;
-		nd_push->next_one = NULL;
+		*dest = node_to_push;
+		node_to_push->next = NULL;
 	}
 	else
 	{
-		nd_push->next_one = *dst;
-		nd_push->next_one->previous_node = nd_push;
-		*dst = nd_push;
+		node_to_push->next = *dest;
+		node_to_push->next->prev = node_to_push;
+		*dest = node_to_push;
 	}
 }
 
-void	pa(t_stackys **stack_a, t_stackys **stack_b, bool checker)
+void	pa(t_stack_node **a, t_stack_node **b, bool checker)
 {
-	push(stack_a, stack_b);
+	push(a, b);
 	if (!checker)
 		write(1, "pa\n", 3);
 }
 
-void	pb(t_stackys **stack_b, t_stackys **stack_a, bool checker)
+void	pb(t_stack_node **b, t_stack_node **a, bool checker)
 {
-	push(stack_b, stack_a);
+	push(b, a);
 	if (!checker)
 		write(1, "pb\n", 3);
 }

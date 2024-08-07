@@ -3,110 +3,111 @@
 /*                                                        :::      ::::::::   */
 /*   algo_init.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thobenel <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: tomtom <tomtom@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/03 13:27:07 by thobenel          #+#    #+#             */
-/*   Updated: 2024/08/03 13:27:10 by thobenel         ###   ########.fr       */
+/*   Updated: 2024/08/07 01:31:23 by tomtom           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "limits.h"
 #include "push_swap.h"
+#include <limits.h>
+#include <stdbool.h>
+#include <stdio.h>
 
-void	suivi_de_pos(t_stackys *stack)
+void	update_current_position(t_stack_node *stack)
 {
 	int	i;
-	int	center;
+	int	mid_point;
 
 	i = 0;
 	if (stack == NULL)
-		return ;
-	center = stack_len(stack) / 2;
-	while (stack)
+		return;
+	mid_point = count_stack_nodes(stack) / 2;
+	while (stack != NULL)
 	{
-		stack->position = i;
-		if (i <= center)
-			stack->median = true;
-		else
-			stack->median = false;
-		stack = stack->next_one;
-		++i;
+		stack->current_position = i;
+		stack->above_median = (i <= mid_point);
+		stack = stack->next;
+		i++;
 	}
 }
 
-static void	def_target(t_stackys *stack_a, t_stackys *stack_b)
+static void	determine_target_node(t_stack_node *a,
+							t_stack_node *b)
 {
-	t_stackys	*current_stack_a;
-	t_stackys	*targette;
-	long int	match;
+	t_stack_node	*current_a;
+	t_stack_node	*best_target;
+	long			lowest_value_above;
 
-	while (stack_b)
+	while (b)
 	{
-		match = LONG_MAX;
-		current_stack_a = stack_a;
-		while (current_stack_a)
+		lowest_value_above = LONG_MAX;
+		current_a = a;
+		while (current_a != NULL)
 		{
-			if (current_stack_a->value > stack_b->value
-				&& current_stack_a->value < match)
+			if (current_a->value > b->value
+				&& current_a->value < lowest_value_above)
 			{
-				match = current_stack_a->value;
-				targette = current_stack_a;
+				lowest_value_above = current_a->value;
+				best_target = current_a;
 			}
-			current_stack_a = current_stack_a->next_one;
+			current_a = current_a->next;
 		}
-		if (LONG_MAX == match)
-			stack_b->target = find_smallest(stack_a);
+		if (lowest_value_above == LONG_MAX)
+			b->target_node = find_minimum(a);
 		else
-			stack_b->target = targette;
-		stack_b = stack_b->next_one;
+			b->target_node = best_target;
+		b = b->next;
 	}
 }
 
-void	price(t_stackys *stack_a, t_stackys *stack_b)
+void	calculate_cost(t_stack_node *a, t_stack_node *b)
 {
-	int	i;
-	int	j;
+	int	len_a;
+	int	len_b;
 
-	i = stack_len(stack_a);
-	j = stack_len(stack_b);
-	while (stack_b)
+	len_a = count_stack_nodes(a);
+	len_b = count_stack_nodes(b);
+	while (b != NULL)
 	{
-		stack_b->push_pr = stack_b->position;
-		if (!(stack_b->median))
-			stack_b->push_pr = j - (stack_b->position);
-		if (stack_b->target->median)
-			stack_b->push_pr += stack_b->target->position;
+		b->push_price = b->current_position;
+		if (!b->above_median)
+			b->push_price = len_b - b->current_position;
+		if (b->target_node->above_median)
+			b->push_price += b->target_node->current_position;
 		else
-			stack_b->push_pr += i - (stack_b->target->position);
-		stack_b = stack_b->next_one;
+			b->push_price += len_a - b->target_node->current_position;
+		b = b->next;
 	}
 }
 
-void	cheap(t_stackys *stack_b)
+void	set_cheapest(t_stack_node *b)
 {
-	long int	i;
-	t_stackys	*match;
-
-	if (stack_b == NULL)
-		return ;
-	i = LONG_MAX;
-	while (stack_b)
+	long			lowest_cost;
+	t_stack_node	*cheapest_node;
+	
+	lowest_cost = LONG_MAX;
+	cheapest_node = NULL;
+	if (b == NULL)
+		return;
+	while (b != NULL)
 	{
-		if (stack_b->push_pr < i)
+		if (b->push_price < lowest_cost)
 		{
-			i = stack_b->push_pr;
-			match = stack_b;
+			lowest_cost = b->push_price;
+			cheapest_node = b;
 		}
-		stack_b = stack_b->next_one;
+		b = b->next;
 	}
-	match->cheaper = true;
+	if(cheapest_node != NULL)
+		cheapest_node->cheapest = true;
 }
-
-void	init_vl(t_stackys *stack_b, t_stackys *stack_a)
+void	initialize_nodes(t_stack_node *a, t_stack_node *b)
 {
-	suivi_de_pos(stack_a);
-	suivi_de_pos(stack_b);
-	def_target(stack_a, stack_b);
-	price(stack_a, stack_b);
-	cheap(stack_b);
+	update_current_position(a);
+	update_current_position(b);
+	determine_target_node(a, b);
+	calculate_cost(a, b);
+	set_cheapest(b);
 }
