@@ -6,7 +6,7 @@
 /*   By: tomtom <tomtom@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/03 13:32:12 by thobenel          #+#    #+#             */
-/*   Updated: 2024/08/07 01:03:59 by tomtom           ###   ########.fr       */
+/*   Updated: 2024/08/08 09:46:41 by tomtom           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+//			ft_atol
 static long	ft_atoi_to_long(const char *str)
 {
 	long	num;
@@ -43,7 +44,7 @@ static long	ft_atoi_to_long(const char *str)
 	return (num * isneg);
 }
 
-void	initialize_stack(t_stack_node **a, char **argv, bool flag_argc_2)
+void	initialize_stack(t_stackys **a, char **argv, bool flag_argc_2)
 {
 	long	value;
 	int		i;
@@ -62,5 +63,5 @@ void	initialize_stack(t_stack_node **a, char **argv, bool flag_argc_2)
 		i++;
 	}
 	if (flag_argc_2)
-		free_matrix(argv);
+		free_background(argv);
 }

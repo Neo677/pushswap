@@ -6,7 +6,7 @@
 /*   By: tomtom <tomtom@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/03 13:27:07 by thobenel          #+#    #+#             */
-/*   Updated: 2024/08/07 01:31:23 by tomtom           ###   ########.fr       */
+/*   Updated: 2024/08/08 09:49:50 by tomtom           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,29 +15,10 @@
 #include <stdbool.h>
 #include <stdio.h>
 
-void	update_current_position(t_stack_node *stack)
+static void	determine_target_node(t_stackys *a, t_stackys *b)
 {
-	int	i;
-	int	mid_point;
-
-	i = 0;
-	if (stack == NULL)
-		return;
-	mid_point = count_stack_nodes(stack) / 2;
-	while (stack != NULL)
-	{
-		stack->current_position = i;
-		stack->above_median = (i <= mid_point);
-		stack = stack->next;
-		i++;
-	}
-}
-
-static void	determine_target_node(t_stack_node *a,
-							t_stack_node *b)
-{
-	t_stack_node	*current_a;
-	t_stack_node	*best_target;
+	t_stackys	*current_a;
+	t_stackys	*best_target;
 	long			lowest_value_above;
 
 	while (b)
@@ -62,7 +43,29 @@ static void	determine_target_node(t_stack_node *a,
 	}
 }
 
-void	calculate_cost(t_stack_node *a, t_stack_node *b)
+void	set_cheapest(t_stackys *b)
+{
+	long			lowest_cost;
+	t_stackys	*cheapest_node;
+
+	lowest_cost = LONG_MAX;
+	cheapest_node = NULL;
+	if (b == NULL)
+		return ;
+	while (b != NULL)
+	{
+		if (b->push_price < lowest_cost)
+		{
+			lowest_cost = b->push_price;
+			cheapest_node = b;
+		}
+		b = b->next;
+	}
+	if (cheapest_node != NULL)
+		cheapest_node->cheapest = true;
+}
+
+void	calculate_cost(t_stackys *a, t_stackys *b)
 {
 	int	len_a;
 	int	len_b;
@@ -82,28 +85,25 @@ void	calculate_cost(t_stack_node *a, t_stack_node *b)
 	}
 }
 
-void	set_cheapest(t_stack_node *b)
+void	update_current_position(t_stackys *stack)
 {
-	long			lowest_cost;
-	t_stack_node	*cheapest_node;
-	
-	lowest_cost = LONG_MAX;
-	cheapest_node = NULL;
-	if (b == NULL)
-		return;
-	while (b != NULL)
+	int	i;
+	int	mid_point;
+
+	i = 0;
+	if (stack == NULL)
+		return ;
+	mid_point = count_stack_nodes(stack) / 2;
+	while (stack != NULL)
 	{
-		if (b->push_price < lowest_cost)
-		{
-			lowest_cost = b->push_price;
-			cheapest_node = b;
-		}
-		b = b->next;
+		stack->current_position = i;
+		stack->above_median = (i <= mid_point);
+		stack = stack->next;
+		i++;
 	}
-	if(cheapest_node != NULL)
-		cheapest_node->cheapest = true;
 }
-void	initialize_nodes(t_stack_node *a, t_stack_node *b)
+
+void	initialize_nodes(t_stackys *a, t_stackys *b)
 {
 	update_current_position(a);
 	update_current_position(b);

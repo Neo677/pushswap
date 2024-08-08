@@ -6,7 +6,7 @@
 /*   By: tomtom <tomtom@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/03 13:33:12 by thobenel          #+#    #+#             */
-/*   Updated: 2024/08/07 01:31:30 by tomtom           ###   ########.fr       */
+/*   Updated: 2024/08/08 09:47:42 by tomtom           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include <stdbool.h>
 #include <stdio.h>
 
-bool	stack_sorted(t_stack_node *stack)
+bool	stack_sorted(t_stackys *stack)
 {
 	if (NULL == stack)
 		return (1);
@@ -28,10 +28,10 @@ bool	stack_sorted(t_stack_node *stack)
 	return (true);
 }
 
-static t_stack_node	*find_highest(t_stack_node *stack)
+static t_stackys	*find_highest(t_stackys *stack)
 {
 	int				highest;
-	t_stack_node	*highest_node;
+	t_stackys	*highest_node;
 
 	if (NULL == stack)
 		return (NULL);
@@ -47,9 +47,10 @@ static t_stack_node	*find_highest(t_stack_node *stack)
 	}
 	return (highest_node);
 }
-void	tiny_sort(t_stack_node **a)
+
+void	tiny_sort(t_stackys **a)
 {
-	t_stack_node	*highest_node;
+	t_stackys	*highest_node;
 
 	highest_node = find_highest(*a);
 	if (*a == highest_node)
@@ -60,7 +61,7 @@ void	tiny_sort(t_stack_node **a)
 		sa(a, false);
 }
 
-void	handle_five(t_stack_node **a, t_stack_node **b)
+void	handle_five(t_stackys **a, t_stackys **b)
 {
 	while (count_stack_nodes(*a) > 3)
 	{

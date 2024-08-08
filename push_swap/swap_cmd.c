@@ -1,24 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   swap.c                                             :+:      :+:    :+:   */
+/*   swap_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tomtom <tomtom@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/03 13:33:20 by thobenel          #+#    #+#             */
-/*   Updated: 2024/08/07 00:56:05 by tomtom           ###   ########.fr       */
+/*   Updated: 2024/08/08 09:59:37 by tomtom           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static void	swap(t_stack_node **head)
+static void	swap(t_stackys **head)
 {
 	int	len;
 
 	len = count_stack_nodes(*head);
-	if (NULL == *head || NULL == head || 1 == len)
-		return ;
+	if (head == NULL || *head == NULL || len == 1)
+		return;
 	*head = (*head)->next;
 	(*head)->prev->prev = *head;
 	(*head)->prev->next = (*head)->next;
@@ -28,21 +28,21 @@ static void	swap(t_stack_node **head)
 	(*head)->prev = NULL;
 }
 
-void	sa(t_stack_node	**a, bool checker)
+void	sa(t_stackys **a, bool checker)
 {
 	swap(a);
 	if (!checker)
 		write(1, "sa\n", 3);
 }
 
-void	sb(t_stack_node **b, bool checker)
+void	sb(t_stackys **b, bool checker)
 {
 	swap(b);
 	if (!checker)
 		write(1, "sb\n", 3);
 }
 
-void	ss(t_stack_node **a, t_stack_node **b, bool checker)
+void	ss(t_stackys **a, t_stackys **b, bool checker)
 {
 	swap(a);
 	swap(b);

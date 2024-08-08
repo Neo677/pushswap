@@ -6,14 +6,14 @@
 /*   By: tomtom <tomtom@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/03 13:33:41 by thobenel          #+#    #+#             */
-/*   Updated: 2024/08/07 01:01:22 by tomtom           ###   ########.fr       */
+/*   Updated: 2024/08/08 09:48:54 by tomtom           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 #include <limits.h>
 
-t_stack_node	*get_tail_node(t_stack_node *start)
+t_stackys	*get_tail_node(t_stackys *start)
 {
 	if (start == NULL)
 		return (NULL);
@@ -22,16 +22,16 @@ t_stack_node	*get_tail_node(t_stack_node *start)
 	return (start);
 }
 
-void	add_node_to_stack(t_stack_node **stack, int nbr)
+void	add_node_to_stack(t_stackys **stack, int nbr)
 {
-	t_stack_node	*node;
-	t_stack_node	*last_node;
+	t_stackys	*node;
+	t_stackys	*last_node;
 
 	if (stack == NULL)
-		return;
-	node = (t_stack_node *)malloc(sizeof(t_stack_node));
+		return ;
+	node = (t_stackys *)malloc(sizeof(t_stackys));
 	if (node == NULL)
-		return;
+		return ;
 	node->next = NULL;
 	node->value = nbr;
 	if (*stack == NULL)
@@ -47,10 +47,10 @@ void	add_node_to_stack(t_stack_node **stack, int nbr)
 	}
 }
 
-t_stack_node	*find_minimum(t_stack_node *stack)
+t_stackys	*find_minimum(t_stackys *stack)
 {
 	long			min_value;
-	t_stack_node	*min_node;
+	t_stackys	*min_node;
 
 	if (stack == NULL)
 		return (NULL);
@@ -67,7 +67,7 @@ t_stack_node	*find_minimum(t_stack_node *stack)
 	return (min_node);
 }
 
-t_stack_node	*locate_cheapest(t_stack_node *stack)
+t_stackys	*locate_cheapest(t_stackys *stack)
 {
 	if (stack == NULL)
 		return (NULL);
@@ -80,7 +80,7 @@ t_stack_node	*locate_cheapest(t_stack_node *stack)
 	return (NULL);
 }
 
-int	count_stack_nodes(t_stack_node *stack)
+int	count_stack_nodes(t_stackys *stack)
 {
 	int	total;
 

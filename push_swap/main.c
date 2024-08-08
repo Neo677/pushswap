@@ -6,7 +6,7 @@
 /*   By: tomtom <tomtom@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/03 13:31:51 by thobenel          #+#    #+#             */
-/*   Updated: 2024/08/07 01:03:21 by tomtom           ###   ########.fr       */
+/*   Updated: 2024/08/08 09:46:33 by tomtom           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 int	main(int argc, char **argv)
 {
-	t_stack_node	*a;
-	t_stack_node	*b;
+	t_stackys	*a;
+	t_stackys	*b;
 
 	a = NULL;
 	b = NULL;

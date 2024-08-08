@@ -6,30 +6,18 @@
 /*   By: tomtom <tomtom@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/03 13:30:59 by thobenel          #+#    #+#             */
-/*   Updated: 2024/08/07 00:40:46 by tomtom           ###   ########.fr       */
+/*   Updated: 2024/08/08 09:46:12 by tomtom           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include <stdlib.h>
 #include <stdio.h>
+#include <stdlib.h>
 
-void	free_matrix(char **argv)
+void	free_stack(t_stackys **stack)
 {
-	int	i;
-
-	i = -1;
-	if (NULL == argv || NULL == *argv)
-		return ;
-	while (argv[i])
-		free(argv[i++]);
-	free(argv - 1);
-}
-
-void	free_stack(t_stack_node **stack)
-{
-	t_stack_node	*tmp;
-	t_stack_node	*current;
+	t_stackys	*tmp;
+	t_stackys	*current;
 
 	if (NULL == stack)
 		return ;
@@ -42,24 +30,36 @@ void	free_stack(t_stack_node **stack)
 	}
 	*stack = NULL;
 }
-void	error_free(t_stack_node **a, char **argv, bool flag_argc_2)
+
+// free the aray made by ft_split
+void	free_background(char **argv)
+{
+	int	i;
+
+	i = -1;
+	if (NULL == argv || NULL == *argv)
+		return ;
+	while (argv[i])
+		free(argv[i++]);
+	free(argv - 1);
+}
+
+void	error_free(t_stackys **a, char **argv, bool flag_argc_2)
 {
 	free_stack(a);
 	if (flag_argc_2)
-		free_matrix(argv);
+		free_background(argv);
 	write(2, "Error\n", 6);
 	exit(1);
 }
 
 int	error_syntax(char *str_nbr)
 {
-	if (!(*str_nbr == '+'
-			|| *str_nbr == '-'
-			|| (*str_nbr >= '0' && *str_nbr <= '9')))
+	if (!(*str_nbr == '+' || *str_nbr == '-' || (*str_nbr >= '0'
+				&& *str_nbr <= '9')))
 		return (1);
-	if ((*str_nbr == '+'
-			|| *str_nbr == '-')
-		&& !(str_nbr[1] >= '0' && str_nbr[1] <= '9'))
+	if ((*str_nbr == '+' || *str_nbr == '-') && !(str_nbr[1] >= '0'
+			&& str_nbr[1] <= '9'))
 		return (1);
 	while (*++str_nbr)
 	{
@@ -69,7 +69,7 @@ int	error_syntax(char *str_nbr)
 	return (0);
 }
 
-int	error_repetition(t_stack_node *a, int nbr)
+int	error_repetition(t_stackys *a, int nbr)
 {
 	if (NULL == a)
 		return (0);

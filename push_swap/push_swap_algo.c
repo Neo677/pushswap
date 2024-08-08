@@ -6,7 +6,7 @@
 /*   By: tomtom <tomtom@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/03 13:32:34 by thobenel          #+#    #+#             */
-/*   Updated: 2024/08/07 01:50:51 by tomtom           ###   ########.fr       */
+/*   Updated: 2024/08/08 09:47:11 by tomtom           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,31 +15,26 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-static void	rotate_stacks_both(t_stack_node **a,
-						t_stack_node **b,
-						t_stack_node *min_cost_node)
+static void	rotate_stacks_both(t_stackys **a, t_stackys **b,
+		t_stackys *min_cost_node)
 {
-	while (*a != min_cost_node->target_node
-		&& *b != min_cost_node)
+	while (*a != min_cost_node->target_node && *b != min_cost_node)
 		rr(a, b, false);
 	update_current_position(*a);
 	update_current_position(*b);
 }
 
-static void	reverse_rotate_stacks_both(t_stack_node **a,
-								t_stack_node **b,
-								t_stack_node *min_cost_node)
+static void	reverse_rotate_stacks_both(t_stackys **a, t_stackys **b,
+		t_stackys *min_cost_node)
 {
-	while (*a != min_cost_node->target_node
-		&& *b != min_cost_node)
+	while (*a != min_cost_node->target_node && *b != min_cost_node)
 		rrr(a, b, false);
 	update_current_position(*a);
 	update_current_position(*b);
 }
 
-void	finish_rotation(t_stack_node **stack,
-							t_stack_node *top_node,
-							char stack_id)
+void	finish_rotation(t_stackys **stack, t_stackys *top_node,
+		char stack_id)
 {
 	while (*stack != top_node)
 	{
@@ -56,17 +51,16 @@ void	finish_rotation(t_stack_node **stack,
 				rb(stack, false);
 			else
 				rrb(stack, false);
-		}	
+		}
 	}
 }
 
-static void	execute_moves(t_stack_node **a, t_stack_node **b)
+static void	execute_moves(t_stackys **a, t_stackys **b)
 {
-	t_stack_node	*min_cost_node;
+	t_stackys	*min_cost_node;
 
 	min_cost_node = locate_cheapest(*b);
-	if (min_cost_node->above_median
-		&& min_cost_node->target_node->above_median)
+	if (min_cost_node->above_median && min_cost_node->target_node->above_median)
 		rotate_stacks_both(a, b, min_cost_node);
 	else if (!(min_cost_node->above_median)
 		&& !(min_cost_node->target_node->above_median))
@@ -76,9 +70,9 @@ static void	execute_moves(t_stack_node **a, t_stack_node **b)
 	pa(a, b, false);
 }
 
-void	push_swap(t_stack_node **a, t_stack_node **b)
+void	push_swap(t_stackys **a, t_stackys **b)
 {
-	t_stack_node	*smallest;
+	t_stackys	*smallest;
 	int				stack_size_a;
 
 	stack_size_a = count_stack_nodes(*a);
