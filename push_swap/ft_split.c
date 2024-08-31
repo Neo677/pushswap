@@ -6,7 +6,7 @@
 /*   By: tomtom <tomtom@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/03 13:31:11 by thobenel          #+#    #+#             */
-/*   Updated: 2024/08/07 23:14:11 by tomtom           ###   ########.fr       */
+/*   Updated: 2024/08/31 23:47:06 by tomtom           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,8 @@ static char	*extract_next_segment(char *str, char delim)
 	while ((str[cursor + len] != delim) && str[cursor + len])
 		len++;
 	next_str = malloc((size_t)len * sizeof(char) + 1);
-	if (NULL == next_str)
-		return (NULL);
+	if (next_str == NULL)
+		return (free(next_str), NULL);
 	while ((str[cursor] != delim) && str[cursor])
 		next_str[i++] = str[cursor++];
 	next_str[i] = '\0';
@@ -70,11 +70,10 @@ char	**ft_split(char *str, char delim)
 	i = 0;
 	words_number = count_segments(str, delim);
 	if (words_number == 0)
-		exit(1);
-	vector_strings = (char **)malloc(sizeof(char *) * (size_t)(words_number
-				+ 2));
-	if (vector_strings == NULL)
 		return (NULL);
+	vector_strings = (char **)malloc(sizeof(char *) * (size_t)(words_number + 2));
+	if (vector_strings == NULL)
+		return (free(vector_strings), NULL);
 	while (words_number-- >= 0)
 	{
 		vector_strings[i] = extract_next_segment(str, delim);

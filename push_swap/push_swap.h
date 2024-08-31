@@ -6,7 +6,7 @@
 /*   By: tomtom <tomtom@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/03 13:32:43 by thobenel          #+#    #+#             */
-/*   Updated: 2024/08/08 09:44:36 by tomtom           ###   ########.fr       */
+/*   Updated: 2024/08/29 21:10:57 by tomtom           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@ int						error_syntax(char *str_nbr);
 int						error_repetition(t_stackys *a, int nbr);
 
 //			algorytme push swap
-void					finish_rotation(t_stackys **stack,
-							t_stackys *top_node, char stack_id);
+void					finish_rotation(t_stackys **stack, t_stackys *top_node,
+							char stack_id);
 void					push_swap(t_stackys **a, t_stackys **b);
 
 //			sortie en output
@@ -84,10 +84,10 @@ void					sb(t_stackys **b, bool checker);
 void					ss(t_stackys **a, t_stackys **b, bool checker);
 
 //			calcul a effectuer dans la stack
-t_stackys			*get_tail_node(t_stackys *start);
+t_stackys				*get_tail_node(t_stackys *start);
 void					add_node_to_stack(t_stackys **stack, int nbr);
-t_stackys			*find_minimum(t_stackys *stack);
-t_stackys			*locate_cheapest(t_stackys *stack);
+t_stackys				*find_minimum(t_stackys *stack);
+t_stackys				*locate_cheapest(t_stackys *stack);
 int						count_stack_nodes(t_stackys *stack);
 
 #endif

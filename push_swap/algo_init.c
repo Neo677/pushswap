@@ -6,7 +6,7 @@
 /*   By: tomtom <tomtom@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/03 13:27:07 by thobenel          #+#    #+#             */
-/*   Updated: 2024/08/08 09:49:50 by tomtom           ###   ########.fr       */
+/*   Updated: 2024/08/31 23:59:14 by tomtom           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,3 +111,4 @@ void	initialize_nodes(t_stackys *a, t_stackys *b)
 	calculate_cost(a, b);
 	set_cheapest(b);
 }
+ 
