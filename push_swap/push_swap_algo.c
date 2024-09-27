@@ -73,14 +73,14 @@ static void	execute_moves(t_stackys **a, t_stackys **b)
 void	push_swap(t_stackys **a, t_stackys **b)
 {
 	t_stackys	*smallest;
-	int				stack_size_a;
+	int				size_a;
 
-	stack_size_a = count_stack_nodes(*a);
-	if (stack_size_a == 5)
+	size_a = count_stack_nodes(*a);
+	if (size_a == 5)
 		handle_five(a, b);
 	else
 	{
-		while (stack_size_a-- > 3)
+		while (size_a-- > 3)
 			pb(b, a, false);
 	}
 	tiny_sort(a);

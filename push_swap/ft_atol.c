@@ -15,53 +15,63 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-//			ft_atol
-static long	ft_atoi_to_long(const char *str)
+//			ft_atoi
+static long	ft_atoi_long(const char *str)
 {
-	long	num;
-	int		isneg;
+	long	nb;
+	int		neg;
 	int		i;
 
-	num = 0;
-	isneg = 1;
+	nb = 0;
+	neg = 1;
 	i = 0;
-	while (str[i] && (str[i] == ' ' || str[i] == '\t'
-			|| str[i] == '\n' || str[i] == '\r'
-			|| str[i] == '\v' || str[i] == '\f'))
+	while (str[i] && (str[i] == ' ' || (str[i] >= 9 && str[i] <= 13)))
 		i++;
-	if (str[i] == '+')
-		i++;
-	else if (str[i] == '-')
+	if (str[i] == '+' || str[i] == '-')
 	{
-		isneg *= -1;
+		if (str[i] == '-')
+			neg *= -1;
 		i++;
 	}
 	while (str[i] >= '0' && str[i] <= '9')
 	{
-		num = num * 10 + (str[i] - '0');
+		nb = nb * 10 + (str[i] - '0');
 		i++;
 	}
-	return (num * isneg);
+	printf("Converting %s to long: %ld\n", str, nb * neg);
+	return (nb * neg);
 }
 
-void	initialize_stack(t_stackys **a, char **argv, bool flag_argc_2)
+void	initialize_stack(t_stackys **a, char **av, bool flg_nb_ac)
 {
 	long	value;
 	int		i;
 
 	i = 0;
-	while (argv[i] != NULL)
+	while (av[i] != NULL)
 	{
-		if (error_syntax(argv[i]))
-			error_free(a, argv, flag_argc_2);
-		value = ft_atoi_to_long(argv[i]);
-		if (value > INT_MAX || value < INT_MIN)
-			error_free(a, argv, flag_argc_2);
+		printf("process arg: %s\n", av[i]);
+		if (error_syntax(av[i]))
+		{
+			error_free(a, av, flg_nb_ac);
+		}
+			
+		value = ft_atoi_long(av[i]);
+		printf("converted value: %ld\n", value);
+		/*if (value > INT_MAX || value < INT_MIN)
+		{
+			error_free(a, av, flg_nb_ac);
+		}*/
+			
 		if (error_repetition(*a, (int)value))
-			error_free(a, argv, flag_argc_2);
+		{
+			printf("Repetition detected for value: %d\n", (int)value);
+			error_free(a, av, flg_nb_ac);
+		}
+			
 		add_node_to_stack(a, (int)value);
 		i++;
 	}
-	if (flag_argc_2)
-		free_background(argv);
+	if (flg_nb_ac)
+		free_background(av);
 }

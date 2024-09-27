@@ -19,7 +19,7 @@ void	free_stack(t_stackys **stack)
 	t_stackys	*tmp;
 	t_stackys	*current;
 
-	if (NULL == stack)
+	if (stack == NULL)
 		return ;
 	current = *stack;
 	while (current)
@@ -31,18 +31,33 @@ void	free_stack(t_stackys **stack)
 	*stack = NULL;
 }
 
-// free the aray made by ft_split
-void	free_background(char **argv)
+// free for ft_split
+void free_background(char **av)
 {
-	int	i;
+    int i = 0;
 
-	i = -1;
-	if (NULL == argv || NULL == *argv)
-		return ;
-	while (argv[i])
-		free(argv[i++]);
-	free(argv - 1);
+    if (av == NULL || *av == NULL)
+        return;
+
+    // Libérer chaque segment
+    while (av[i])
+    {
+        printf("Freeing: %p (content: %s)\n", (void *)av[i], av[i]);
+        free(av[i]);  // Libérer chaque segment
+        av[i] = NULL;  // Réinitialiser après libération
+        i++;
+    }
+
+    // Libérer le tableau principal seulement s'il a été alloué
+    printf("Freeing av: %p\n", (void *)av);
+    free(av);  // Libérer le tableau principal
+    av = NULL;  // Réinitialiser après libération
+    printf("Memory freed successfully\n");  // Débogage
+
 }
+
+
+
 
 void	error_free(t_stackys **a, char **argv, bool flag_argc_2)
 {
@@ -71,12 +86,16 @@ int	error_syntax(char *str_nbr)
 
 int	error_repetition(t_stackys *a, int nbr)
 {
-	if (NULL == a)
+	if (a == NULL)
 		return (0);
 	while (a)
 	{
 		if (a->value == nbr)
+		{
+			printf("repeat found = %d\n", nbr);
 			return (1);
+		}
+			
 		a = a->next;
 	}
 	return (0);

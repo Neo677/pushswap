@@ -17,7 +17,7 @@
 
 bool	stack_sorted(t_stackys *stack)
 {
-	if (NULL == stack)
+	if (stack == NULL)
 		return (1);
 	while (stack->next)
 	{
@@ -33,7 +33,7 @@ static t_stackys	*find_highest(t_stackys *stack)
 	int				highest;
 	t_stackys	*highest_node;
 
-	if (NULL == stack)
+	if (stack == NULL)
 		return (NULL);
 	highest = INT_MIN;
 	while (stack)

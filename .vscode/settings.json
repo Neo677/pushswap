@@ -1,6 +1,10 @@
 {
 	"files.associations": {
 		"push_swap.h": "c",
-		"stdio.h": "c"
+		"stdio.h": "c",
+		"regex": "c",
+		"sstream": "c",
+		"queue": "c",
+		"stack": "c"
 	}
 }

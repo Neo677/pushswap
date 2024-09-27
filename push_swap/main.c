@@ -12,18 +12,24 @@
 
 #include "push_swap.h"
 
-int	main(int argc, char **argv)
+int	main(int ac, char **av)
 {
 	t_stackys	*a;
 	t_stackys	*b;
+	char **decoupe;
 
 	a = NULL;
 	b = NULL;
-	if (1 == argc || (2 == argc && !argv[1][0]))
+	if (ac == 1 || (ac == 2 && !av[1][0]))
 		return (1);
-	else if (2 == argc)
-		argv = ft_split(argv[1], ' ');
-	initialize_stack(&a, argv + 1, 2 == argc);
+	else if (ac == 2)
+	{
+		decoupe = ft_split(av[1], ' ');
+		initialize_stack(&a, decoupe, true);
+		free_background(decoupe);
+	}
+	else
+		initialize_stack(&a, av + 1, false);
 	if (!stack_sorted(a))
 	{
 		if (count_stack_nodes(a) == 2)

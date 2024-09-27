@@ -12,75 +12,92 @@
 
 #include "push_swap.h"
 #include <stddef.h>
+#include <stdio.h>
 
-static int	count_segments(char *str, char delim)
+static int	count_seg(char *str, char delim)
 {
 	int		count;
-	bool	in_word;
+	int		in_word;
 
 	count = 0;
+	in_word = 0;
 	while (*str)
 	{
-		in_word = false;
-		while (*str == delim && *str)
-			str++;
-		while (*str != delim && *str)
+		if (*str != delim && !in_word)
 		{
-			if (!in_word)
-			{
-				++count;
-				in_word = true;
-			}
-			str++;
+			in_word = 1;
+			count++;
 		}
-		in_word = false;
+		else if (*str == delim && in_word)
+			in_word = 0;
+		str++;
 	}
+	printf("count seg = %d\n", count);
 	return (count);
 }
 
-static char	*extract_next_segment(char *str, char delim)
+static char *new_seg(char **str, char delim)
 {
-	static int	cursor;
-	char		*next_str;
-	int			len;
-	int			i;
+    char *new_str;
+    int len = 0;
+	int i = 0;
+    // Sauter les délimiteurs initiaux
+    while (**str == delim)
+        (*str)++;  // Avancer dans la chaîne principale
 
-	len = 0;
-	i = 0;
-	cursor = 0;
-	while (str[cursor] == delim)
-		cursor++;
-	while ((str[cursor + len] != delim) && str[cursor + len])
-		len++;
-	next_str = malloc((size_t)len * sizeof(char) + 1);
-	if (next_str == NULL)
-		return (free(next_str), NULL);
-	while ((str[cursor] != delim) && str[cursor])
-		next_str[i++] = str[cursor++];
-	next_str[i] = '\0';
-	return (next_str);
+    // Calculer la longueur du segment suivant
+    while ((*str)[len] != delim && (*str)[len])
+        len++;
+
+    printf("Extracting segment of length %d\n", len);  // Afficher la longueur
+
+    // Allouer la mémoire pour le segment
+    new_str = malloc((sizeof(char)) * (len + 1));
+    if (!new_str)
+        return (free(new_str), NULL);
+
+    // Copier chaque caractère dans le nouveau segment
+    while (i < len)
+    {
+        printf("Copying character: %c\n", **str);  // Afficher chaque caractère copié
+        new_str[i] = *(*str)++;
+		i++;
+    }
+
+    new_str[len] = '\0';  // Terminer la chaîne avec '\0'
+    printf("Extracted segment: %s\n", new_str);  // Afficher le segment extrait
+    return (new_str);
 }
+
 
 char	**ft_split(char *str, char delim)
 {
-	int		words_number;
-	char	**vector_strings;
+	int		count;
+	char	**ptr_str;
 	int		i;
 
 	i = 0;
-	words_number = count_segments(str, delim);
-	if (words_number == 0)
+	if (!str)
 		return (NULL);
-	vector_strings = (char **)malloc(sizeof(char *) * (size_t)(words_number + 2));
-	if (vector_strings == NULL)
-		return (free(vector_strings), NULL);
-	while (words_number-- >= 0)
+	count = count_seg(str, delim);
+	ptr_str = malloc(sizeof(char *) * (count + 1));
+	 printf("Allocated segment pointer: %p\n", ptr_str);
+
+	if (!ptr_str)
+		return (free(ptr_str), NULL);
+	while (i < count)
 	{
-		vector_strings[i] = extract_next_segment(str, delim);
-		if (vector_strings[i] == NULL)
-			return (NULL);
+		ptr_str[i] = new_seg(&str, delim);
+		if (!ptr_str[i])
+		{
+			while (i > 0)
+				free(ptr_str[--i]);
+			free(ptr_str);
+		    printf("Freeing segment pointer: %p\n", ptr_str);
+			return (NULL);	
+		}
 		i++;
 	}
-	vector_strings[i] = NULL;
-	return (vector_strings);
+	ptr_str[i] = NULL;
+	return (ptr_str);
 }
