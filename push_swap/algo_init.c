@@ -19,23 +19,23 @@ static void	determine_target_node(t_stackys *a, t_stackys *b)
 {
 	t_stackys	*ptr_a;
 	t_stackys	*best_target;
-	long			lowest_value_above;
+	long			lowest_value;
 
 	while (b)
 	{
-		lowest_value_above = LONG_MAX;
+		lowest_value = LONG_MAX;
 		ptr_a = a;
 		while (ptr_a != NULL)
 		{
 			if (ptr_a->value > b->value
-				&& ptr_a->value < lowest_value_above)
+				&& ptr_a->value < lowest_value)
 			{
-				lowest_value_above = ptr_a->value;
+				lowest_value = ptr_a->value;
 				best_target = ptr_a;
 			}
 			ptr_a = ptr_a->next;
 		}
-		if (lowest_value_above == LONG_MAX)
+		if (lowest_value == LONG_MAX)
 			b->target_node = find_minimum(a);
 		else
 			b->target_node = best_target;

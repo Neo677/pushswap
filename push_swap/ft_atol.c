@@ -12,8 +12,8 @@
 
 #include "push_swap.h"
 #include <limits.h>
-#include <stdlib.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 //			ft_atoi
 static long	ft_atoi_long(const char *str)
@@ -38,9 +38,9 @@ static long	ft_atoi_long(const char *str)
 		nb = nb * 10 + (str[i] - '0');
 		i++;
 	}
-	printf("Converting %s to long: %ld\n", str, nb * neg);
 	return (nb * neg);
 }
+// printf("Converting %s to long: %ld\n", str, nb * neg);
 
 void	initialize_stack(t_stackys **a, char **av, bool flg_nb_ac)
 {
@@ -50,28 +50,55 @@ void	initialize_stack(t_stackys **a, char **av, bool flg_nb_ac)
 	i = 0;
 	while (av[i] != NULL)
 	{
-		printf("process arg: %s\n", av[i]);
 		if (error_syntax(av[i]))
-		{
 			error_free(a, av, flg_nb_ac);
-		}
-			
 		value = ft_atoi_long(av[i]);
-		printf("converted value: %ld\n", value);
-		/*if (value > INT_MAX || value < INT_MIN)
-		{
+		if (value > INT_MAX || value < INT_MIN)
 			error_free(a, av, flg_nb_ac);
-		}*/
-			
 		if (error_repetition(*a, (int)value))
-		{
-			printf("Repetition detected for value: %d\n", (int)value);
 			error_free(a, av, flg_nb_ac);
-		}
-			
 		add_node_to_stack(a, (int)value);
 		i++;
 	}
 	if (flg_nb_ac)
 		free_background(av);
 }
+
+// alternate version
+// void	initialize_stack(t_stackys **a, char **av, bool flg_nb_ac)
+// {
+// 	long	value;
+// 	int		i;
+
+// 	i = 0;
+// 	while (av[i] != NULL)
+// 	{
+// 		printf("process arg: %s\n", av[i]);
+// 		if (error_syntax(av[i]))
+// 		{
+// 			printf("Error: syntax issue with argument %s\n", av[i]);
+// 			error_free(a, av, flg_nb_ac);
+// 		}
+
+// 		value = ft_atoi_long(av[i]);
+// 		printf("converted value: %ld\n", value);
+// 		if (value > INT_MAX || value < INT_MIN)
+// 		{
+// 			error_free(a, av, flg_nb_ac);
+// 		}
+// 		if (error_repetition(*a, (int)value))
+// 		{
+// 			printf("Repetition detected for value: %d\n", (int)value);
+// 			error_free(a, av, flg_nb_ac);
+// 		}
+
+// 		add_node_to_stack(a, (int)value);
+// 		printf("Value %ld added to stack\n", value);
+// 		i++;
+// 	}
+// 	if (flg_nb_ac)
+// 	{
+// 		printf ("freeeing the arg as they came from split\n");
+// 		free_background(av);
+// 	}
+// }
