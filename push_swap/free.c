@@ -45,6 +45,7 @@ void	free_background(char **av)
 		av[i] = NULL;
 		i++;
 	}
+	free(av);
 	av = NULL;
 }
 
@@ -77,7 +78,7 @@ void	error_free(t_stackys **a, char **argv, bool flag_argc_2)
 	free_stack(a);
 	if (flag_argc_2)
 		free_background(argv);
-	write(2, "Erreur\n", 6);
+	write(2, "Error\n", 6);
 	exit(1);
 }
 
